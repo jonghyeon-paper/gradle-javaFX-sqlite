@@ -1,0 +1,38 @@
+import org.gradle.plugins.ide.eclipse.model.AccessRule
+
+apply plugin: 'java-library'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+// 이클립스에서 javafx에 접근하기 위해 이클리스의 라이브러리 접근룰 강제수정
+eclipse {
+    classpath {
+        file {
+            whenMerged {
+                def jre = entries.find {it.path.contains 'org.eclipse.jdt.launching.JRE_CONTAINER'}
+                jre.accessRules.add(new AccessRule('0', 'javafx/**'))
+            }
+        }
+    }
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/de.saxsys/mvvmfx
+    compile group: 'de.saxsys', name: 'mvvmfx', version: '1.7.0'
+    
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+    
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.5.9.RELEASE'
+    
+    // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.20.1'
+    compile 'com.enigmabridge:hibernate4-sqlite-dialect:0.1.2'
+
+}
