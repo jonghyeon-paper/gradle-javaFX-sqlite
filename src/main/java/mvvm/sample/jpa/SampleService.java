@@ -2,6 +2,8 @@ package mvvm.sample.jpa;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,12 @@ public class SampleService {
 	
 	public List<Users> getUsersList() {
 		return (List<Users>) usersRepository.findAll();
+	}
+	
+	@Transactional
+	public boolean addUsersList(List<Users> usersList) {
+		usersRepository.save(usersList);
+		return true;
 	}
 
 }
