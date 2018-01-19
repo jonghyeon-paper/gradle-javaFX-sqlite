@@ -27,12 +27,12 @@ public class DataExport {
 	
 	@Test
 	public void dataExport() throws IOException {
-		for (Users item : sampleService.getUsersList()) {
+		for (Users item : sampleService.retrieveAll()) {
 			System.out.println(item.toString());
 		}
 		
 		ObjectMapper mapper = new ObjectMapper();
-		String result = VERSION + NEWLINE + mapper.writerWithDefaultPrettyPrinter().writeValueAsString(sampleService.getUsersList());
+		String result = VERSION + NEWLINE + mapper.writerWithDefaultPrettyPrinter().writeValueAsString(sampleService.retrieveAll());
 		System.out.println(result);
 		
 		String filePath = "src/main/resources/data/basic";

@@ -27,7 +27,7 @@ public class Starter extends Application {
 	public void init() throws Exception {
 		//TODO
 		SampleService sampleService = context.getBean(SampleService.class);
-		for (Users item : sampleService.getUsersList()) {
+		for (Users item : sampleService.retrieveAll()) {
 			System.out.println(item.toString());
 		}
 	}

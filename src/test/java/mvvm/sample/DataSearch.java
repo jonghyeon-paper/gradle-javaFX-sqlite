@@ -13,14 +13,25 @@ import mvvm.sample.jpa.Users;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class JUnitTest {
-	
+public class DataSearch {
+
 	@Autowired
 	private SampleService sampleService;
 	
 	@Test
-	public void show() throws IOException {
-		for (Users item : sampleService.retrieveAll()) {
+	public void searchId() throws IOException {
+		Users users = new Users();
+		users.setId(2);
+		for (Users item : sampleService.retrieveList(users)) {
+			System.out.println(item.toString());
+		}
+	}
+	
+	@Test
+	public void searchName() throws IOException {
+		Users users = new Users();
+		users.setName("aaa");
+		for (Users item : sampleService.retrieveList(users)) {
 			System.out.println(item.toString());
 		}
 	}

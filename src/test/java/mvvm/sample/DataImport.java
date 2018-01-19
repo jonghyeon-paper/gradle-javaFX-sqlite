@@ -49,9 +49,9 @@ public class DataImport {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		List<Users> usersList = mapper.readValue(sb.toString(), new TypeReference<List<Users>>(){});
-		sampleService.addUsersList(usersList);
+		sampleService.add(usersList);
 		
-		for (Users item : sampleService.getUsersList()) {
+		for (Users item : sampleService.retrieveAll()) {
 			System.out.println(item.toString());
 		}
 	}
